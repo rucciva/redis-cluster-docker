@@ -1,0 +1,6 @@
+version: "2.4"
+services:
+  redis:
+    build: .
+    image: rucciva/redis-cluster:5.0.4
+    restart: unless-stopped

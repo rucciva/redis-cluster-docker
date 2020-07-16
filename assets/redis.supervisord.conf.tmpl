@@ -1,0 +1,7 @@
+[program:redis-${PORT}]
+command=redis-server ${REDIS_CLUSTER_CONF_DIR}/${PORT}/${REDIS_CLUSTER_CONF_FILE}
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
+autorestart=true

@@ -1,0 +1,8 @@
+protected-mode no
+bind 0.0.0.0
+port ${PORT}
+dir ${REDIS_CLUSTER_DATA_DIR}/${PORT}
+cluster-enabled yes
+cluster-config-file ${REDIS_CLUSTER_CONF_FILE}
+cluster-node-timeout 5000
+appendonly yes
