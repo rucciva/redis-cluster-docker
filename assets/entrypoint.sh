@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IP=$(eval $REDIS_CLUSTER_IP_COMMAND)
+IP=$(awk '/32 host/ { print f } {f=$2}' /proc/net/fib_trie | sort | uniq | grep -v 127.0.0.1)
 
 function wait_redis_instances(){
     loop=0

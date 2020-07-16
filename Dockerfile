@@ -12,12 +12,13 @@ RUN apt-get update -y \
     && apt-get install --no-install-recommends -y \
         locales \
         gettext \
-        net-tools \
         supervisor \
     # locale
     && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
     && locale-gen \
-    # remove cache
+    # clean up
+    && apt-get autoremove -y \
+    && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
     
 ENV LANG en_US.UTF-8
@@ -34,7 +35,6 @@ ENV REDIS_CLUSTER_INSTANCES_COUNT ${REDIS_CLUSTER_INSTANCES_COUNT:-6}
 ENV REDIS_CLUSTER_CONF_DIR /redis-conf 
 ENV REDIS_CLUSTER_DATA_DIR /redis-data
 ENV REDIS_CLUSTER_CONF_FILE redis.conf 
-ENV REDIS_CLUSTER_IP_COMMAND "ifconfig | grep 'inet' | awk '{print \$2}' | grep -v '^127' | head -n 1"
 
 COPY ./assets /tmp/assets
 RUN cp /tmp/assets/build.sh /build.sh \
