@@ -45,7 +45,7 @@ function change_ip(){
     for PORT in `seq $REDIS_CLUSTER_FIRST_PORT $REDIS_CLUSTER_LAST_PORT`; do
         conf="$REDIS_CLUSTER_DATA_DIR/$PORT/$REDIS_CLUSTER_CONF_FILE"
         regexp="[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}"
-        sed -e "s/$regexp:/$IP:/g" "$conf"
+        sed -i -e "s/$regexp:/$IP:/g" "$conf"
     done
 }
 
